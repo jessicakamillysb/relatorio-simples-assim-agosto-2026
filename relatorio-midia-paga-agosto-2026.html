@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Mídia Paga · Agosto 2026 · Simples Assim Atacado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#c4a1a2; --azul:#9DD9FF; --amarelo:#FEF2C9; --verde:#CAE2C9;
+    --ink:#2b2724; --ink-soft:#5c554f; --line:#e7e0d8;
+    --paper:#faf7f2; --card:#ffffff;
+    --rosa-d:#a87c7d; --verde-d:#7fae7c; --azul-d:#4a9fd4;
+    --shadow:0 1px 2px rgba(43,39,36,.04),0 8px 24px rgba(43,39,36,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Source Serif 4",Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.mono-label{font-family:"Montserrat",sans-serif}
+  .mono{font-family:"DM Mono",monospace}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+  .strip{background:var(--ink);color:#fff;text-align:center;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
+
+  header.hero{
+    background:
+      radial-gradient(120% 140% at 85% -10%, var(--amarelo) 0%, transparent 45%),
+      radial-gradient(120% 130% at 0% 0%, var(--azul) 0%, transparent 42%),
+      var(--card);
+    border-bottom:1px solid var(--line);padding:clamp(38px,6vw,64px) 0 clamp(30px,5vw,48px);
+  }
+  .kicker{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rosa-d);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px}
+  .kicker::before{content:"";width:26px;height:2px;background:var(--rosa-d);display:inline-block}
+  header.hero h1{font-weight:900;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.02;letter-spacing:-.02em;color:var(--ink);max-width:16ch}
+  .hero-sub{margin-top:16px;font-size:clamp(1rem,2.2vw,1.18rem);color:var(--ink-soft);max-width:58ch}
+  .hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .pill{font-family:"DM Mono",monospace;font-size:.78rem;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:6px 13px;color:var(--ink-soft)}
+
+  nav.sticky{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav.sticky .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+  nav.sticky .wrap::-webkit-scrollbar{display:none}
+  nav.sticky a{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.76rem;text-decoration:none;color:var(--ink-soft);white-space:nowrap;padding:7px 13px;border-radius:8px;transition:.15s}
+  nav.sticky a:hover{background:var(--card);color:var(--ink)}
+
+  section{padding:clamp(40px,6vw,64px) 0}
+  section + section{border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:30px}
+  .sec-tag{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rosa-d)}
+  .sec-head h2{font-weight:800;font-size:clamp(1.5rem,3.4vw,2.15rem);letter-spacing:-.015em;margin-top:8px;line-height:1.1}
+  .sec-head p{color:var(--ink-soft);margin-top:10px;max-width:66ch;font-size:1.02rem}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .kpi.k-rosa::before{background:var(--rosa)} .kpi.k-azul::before{background:var(--azul)}
+  .kpi.k-amarelo::before{background:var(--amarelo)} .kpi.k-verde::before{background:var(--verde)}
+  .kpi .lab{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .kpi .val{font-family:"Montserrat",sans-serif;font-weight:900;font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.02em;margin-top:8px;line-height:1}
+  .kpi .foot{font-size:.85rem;color:var(--ink-soft);margin-top:8px}
+  .delta{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.78rem;display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;margin-top:8px}
+  .delta.dn{background:#f6e7e7;color:var(--rosa-d)} .delta.up{background:#e7f2e6;color:var(--verde-d)} .delta.flat{background:var(--paper);color:var(--ink-soft)}
+
+  .callout{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3vw,32px);box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:24px}
+  .callout.attn{border-left:5px solid var(--rosa)}
+  .callout .big{font-family:"Montserrat",sans-serif;font-weight:900;font-size:clamp(2.6rem,7vw,3.8rem);line-height:.9;letter-spacing:-.03em;color:var(--rosa-d)}
+  .callout .big span{display:block;font-size:.9rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+  .callout p{font-size:1.04rem;color:var(--ink)}
+  .callout strong{color:var(--ink);font-weight:600}
+
+  /* comparativo Jul -> Ago */
+  .cmp{overflow-x:auto;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);background:var(--card)}
+  table.cmpt{width:100%;border-collapse:collapse;min-width:560px}
+  table.cmpt th,table.cmpt td{padding:14px 18px;text-align:right;border-bottom:1px solid var(--line)}
+  table.cmpt th:first-child,table.cmpt td:first-child{text-align:left}
+  table.cmpt thead th{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper)}
+  table.cmpt tbody td{font-family:"DM Mono",monospace;font-size:.92rem}
+  table.cmpt tbody td:first-child{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.9rem}
+  table.cmpt tbody tr:last-child td{border-bottom:none}
+  .tdelta{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.82rem;padding:3px 9px;border-radius:100px}
+  .tdelta.dn{background:#f6e7e7;color:var(--rosa-d)} .tdelta.up{background:#e7f2e6;color:var(--verde-d)} .tdelta.flat{background:var(--paper);color:var(--ink-soft)}
+
+  .plat{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .platcard{border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow);background:var(--card)}
+  .platcard.meta{background:linear-gradient(180deg,#f4faff 0%,var(--card) 55%)}
+  .platcard.google{background:linear-gradient(180deg,#fffdf4 0%,var(--card) 55%)}
+  .platcard .ptop{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .platcard h3{font-weight:900;font-size:1.35rem;letter-spacing:-.01em}
+  .badge{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+  .badge.b-azul{background:var(--azul);color:#0d3f5e} .badge.b-amarelo{background:var(--amarelo);color:#7a5f00}
+  .prow{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:6px}
+  .pmini .l{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .pmini .v{font-family:"Montserrat",sans-serif;font-weight:800;font-size:1.32rem;margin-top:2px}
+
+  .splitbar{margin-top:26px}
+  .splitbar .srow{margin-bottom:16px}
+  .splitbar .slab{display:flex;justify-content:space-between;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.8rem;margin-bottom:6px}
+  .track{height:26px;border-radius:8px;background:var(--paper);border:1px solid var(--line);overflow:hidden;display:flex}
+  .track .seg{height:100%;display:flex;align-items:center;padding:0 10px;font-family:"DM Mono",monospace;font-size:.72rem;color:var(--ink);white-space:nowrap}
+  .seg.s-meta{background:var(--azul)} .seg.s-google{background:var(--amarelo)}
+
+  .chartcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 20px 16px;box-shadow:var(--shadow);margin-top:8px}
+  .chart{position:relative;height:220px;display:flex;align-items:flex-end;gap:3px;padding-top:10px}
+  .chart .bar{flex:1;border-radius:4px 4px 0 0;position:relative;min-height:3px;transition:.2s}
+  .chart .bar.mid{background:var(--azul)} .chart .bar.hi{background:var(--verde-d)} .chart .bar.lo{background:var(--rosa)}
+  .chart .bar .bt{position:absolute;top:-16px;left:0;right:0;text-align:center;font-family:"DM Mono",monospace;font-size:.58rem;color:var(--ink-soft);opacity:0}
+  .chart .bar:hover .bt{opacity:1}
+  .chart .bar.hi .bt{opacity:1;font-weight:500;color:var(--verde-d)}
+  .beline{position:absolute;left:0;right:0;border-top:2px dashed var(--rosa-d);z-index:2}
+  .beline span{position:absolute;right:0;top:-9px;background:var(--paper);padding:0 6px;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosa-d)}
+  .xaxis{display:flex;gap:3px;margin-top:6px}
+  .xaxis span{flex:1;text-align:center;font-family:"DM Mono",monospace;font-size:.52rem;color:var(--ink-soft)}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+  .legend i{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;color:var(--ink-soft);font-style:normal}
+  .legend i::before{content:"";width:13px;height:13px;border-radius:3px}
+  .legend .lg-hi::before{background:var(--verde-d)} .legend .lg-mid::before{background:var(--azul)} .legend .lg-lo::before{background:var(--rosa)}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  .listcard{border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--card);box-shadow:var(--shadow)}
+  .listcard.good{border-top:4px solid var(--verde-d)}
+  .listcard.warn{border-top:4px solid var(--rosa-d)}
+  .listcard h3{font-weight:800;font-size:1.1rem;margin-bottom:4px}
+  .listcard .hint{font-size:.88rem;color:var(--ink-soft);margin-bottom:16px}
+  .daylist{list-style:none}
+  .daylist li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .daylist li:last-child{border-bottom:none}
+  .daylist .dd{font-family:"Montserrat",sans-serif;font-weight:700;font-size:.92rem}
+  .daylist .dd small{display:block;font-weight:600;font-size:.72rem;color:var(--ink-soft);font-family:"Source Serif 4",serif}
+  .daylist .rr{font-family:"Montserrat",sans-serif;font-weight:900;font-size:1.15rem}
+  .rr.up{color:var(--verde-d)} .rr.down{color:var(--rosa-d)}
+  .daylist .rc{font-family:"DM Mono",monospace;font-size:.74rem;color:var(--ink-soft);text-align:right}
+
+  .wkchart{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:8px}
+  .wkcol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 8px 12px;text-align:center;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+  .wkcol .wbar{width:26px;border-radius:6px 6px 0 0;background:var(--azul);margin-bottom:10px}
+  .wkcol.best .wbar{background:var(--verde-d)} .wkcol.worst .wbar{background:var(--rosa)}
+  .wkcol .wd{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+  .wkcol .wv{font-family:"DM Mono",monospace;font-size:.78rem;color:var(--ink-soft);margin-top:3px}
+
+  .crgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+  .crcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .crthumb{aspect-ratio:9/12;background:linear-gradient(135deg,var(--rosa) 0%,var(--amarelo) 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .crthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .crthumb .ph{font-family:"Montserrat",sans-serif;font-weight:900;font-size:2rem;color:rgba(255,255,255,.65);letter-spacing:.05em}
+  .crrank{position:absolute;top:10px;left:10px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-family:"Montserrat",sans-serif;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+  .crbody{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .crcode{font-family:"DM Mono",monospace;font-size:.82rem;font-weight:500;color:var(--ink);word-break:break-all}
+  .crlink{margin-top:auto;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--azul-d);display:inline-flex;align-items:center;gap:6px}
+  .crlink::after{content:"→";transition:.15s}
+  .crlink:hover::after{transform:translateX(3px)}
+
+  .reads{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .readcard{border-radius:18px;padding:26px 24px;position:relative;overflow:hidden;border:1px solid var(--line)}
+  .readcard.r1{background:var(--amarelo)} .readcard.r2{background:var(--azul)} .readcard.r3{background:var(--verde)}
+  .readcard .rtag{font-family:"Montserrat",sans-serif;font-weight:800;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,39,36,.55)}
+  .readcard h3{font-weight:800;font-size:1.1rem;margin:10px 0 8px;letter-spacing:-.01em}
+  .readcard p{font-size:.96rem;color:var(--ink)}
+
+  footer{background:var(--ink);color:#cfc7bd;padding:40px 0;text-align:center}
+  footer .fl{font-family:"Montserrat",sans-serif;font-weight:900;font-size:1.1rem;color:#fff;letter-spacing:.02em}
+  footer p{font-size:.85rem;margin-top:8px;color:#9d968c}
+
+  @media (max-width:640px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .plat,.twocol,.callout{grid-template-columns:1fr}
+    .callout{gap:14px}
+    .reads{grid-template-columns:1fr}
+    .prow{grid-template-columns:1fr 1fr}
+    .wkchart{grid-template-columns:repeat(7,1fr);gap:5px}
+    .wkcol{padding:10px 3px 8px}
+    .wkcol .wbar{width:16px}
+    .wkcol .wd{font-size:.6rem}
+    .chart{height:170px}
+  }
+</style>
+</head>
+<body>
+
+<div class="strip">Relatório de Mídia Paga · Fechamento de Agosto 2026</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Simples Assim Atacado · Tráfego Pago</span>
+    <h1>Relatório de Mídia Paga</h1>
+    <p class="hero-sub">Como o investimento em Meta Ads e Google Ads trabalhou em agosto: quanto entrou, quanto sobrou de lucro, onde estão os pontos de atenção e o que fazer a seguir.</p>
+    <div class="hero-meta">
+      <span class="pill">Período: 01/08 → 31/08/2026</span>
+      <span class="pill">31 dias</span>
+      <span class="pill">Meta Ads + Google Ads</span>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="wrap">
+    <a href="#resumo">Resumo</a>
+    <a href="#panorama">Panorama</a>
+    <a href="#plataformas">Meta vs Google</a>
+    <a href="#diario">Dia a dia</a>
+    <a href="#destaques">Destaques</a>
+    <a href="#semana">Por dia da semana</a>
+    <a href="#criativos">Melhores criativos</a>
+    <a href="#proximos">Próximos passos</a>
+  </div>
+</nav>
+
+<!-- RESUMO -->
+<section id="resumo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Resumo do mês</span>
+      <h2>Os números que importam</h2>
+      <p>Cada R$ 1,00 investido em anúncio voltou como R$ 7,56 em vendas atribuídas ao tráfego. Depois de pagar a mídia, sobraram R$ 23 mil de lucro no mês.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi k-rosa">
+        <div class="lab">Investido em anúncios</div>
+        <div class="val">R$ 10.707</div>
+        <div class="foot">R$ 345,41 por dia, em média</div>
+      </div>
+      <div class="kpi k-azul">
+        <div class="lab">Vendas do tráfego pago</div>
+        <div class="val">R$ 80.927</div>
+        <div class="foot">205 pedidos atribuídos</div>
+      </div>
+      <div class="kpi k-amarelo">
+        <div class="lab">ROAS do tráfego pago</div>
+        <div class="val">7,56×</div>
+        <div class="foot">Meta de equilíbrio: 4,0×</div>
+      </div>
+      <div class="kpi k-verde">
+        <div class="lab">Lucro depois da mídia</div>
+        <div class="val">R$ 23.080</div>
+        <div class="foot">Margem de 25% menos o custo dos anúncios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANORAMA -->
+<section id="panorama">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Panorama</span>
+      <h2>Quase 60% do faturamento veio do anúncio</h2>
+      <p>A leitura do mês aponta para conversão, não para tráfego: as visitas seguiram em bom volume, mas a taxa de conversão ficou baixa. Vale cruzar com estoque e profundidade de catálogo antes de mexer nas campanhas.</p>
+    </div>
+    <div class="callout attn">
+      <div class="big">59,9%<span>do faturamento veio<br>do tráfego pago</span></div>
+      <p>O tráfego pago respondeu por <strong>quase 60% do faturamento</strong> do mês — a mídia sustentou boa parte das vendas. As sessões se mantiveram em bom volume (<strong>69.398</strong> no mês), mas a taxa de conversão da loja ficou em <strong>0,49%</strong>: as pessoas entraram, e o gargalo esteve na hora de fechar o pedido. Por isso, antes de mexer na verba, o primeiro lugar para olhar é estoque e profundidade de catálogo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLATAFORMAS -->
+<section id="plataformas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Meta vs Google</span>
+      <h2>Onde o dinheiro trabalhou melhor</h2>
+      <p>O Meta levou a maior parte da verba e das vendas. Mas o melhor retorno veio do Google, que com uma fatia bem menor de investimento entregou o maior ROAS do mês.</p>
+    </div>
+    <div class="plat">
+      <div class="platcard meta">
+        <div class="ptop">
+          <h3>Meta Ads</h3>
+          <span class="badge b-azul">82% da verba</span>
+        </div>
+        <div class="prow">
+          <div class="pmini"><div class="l">Investido</div><div class="v">R$ 8.745</div></div>
+          <div class="pmini"><div class="l">Vendas atribuídas</div><div class="v">R$ 61.659</div></div>
+          <div class="pmini"><div class="l">ROAS</div><div class="v">7,05×</div></div>
+          <div class="pmini"><div class="l">Pedidos</div><div class="v">163</div></div>
+          <div class="pmini"><div class="l">Custo por pedido</div><div class="v">R$ 53,65</div></div>
+          <div class="pmini"><div class="l">% das vendas de tráfego</div><div class="v">76%</div></div>
+        </div>
+      </div>
+      <div class="platcard google">
+        <div class="ptop">
+          <h3>Google Ads</h3>
+          <span class="badge b-amarelo">18% da verba</span>
+        </div>
+        <div class="prow">
+          <div class="pmini"><div class="l">Investido</div><div class="v">R$ 1.961</div></div>
+          <div class="pmini"><div class="l">Vendas atribuídas</div><div class="v">R$ 19.267</div></div>
+          <div class="pmini"><div class="l">ROAS</div><div class="v">9,82×</div></div>
+          <div class="pmini"><div class="l">Pedidos</div><div class="v">42</div></div>
+          <div class="pmini"><div class="l">Custo por pedido</div><div class="v">R$ 46,71</div></div>
+          <div class="pmini"><div class="l">% das vendas de tráfego</div><div class="v">24%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="splitbar">
+      <div class="srow">
+        <div class="slab"><span>Divisão do investimento</span><span>R$ 10.707 no total</span></div>
+        <div class="track">
+          <div class="seg s-meta" style="width:81.7%">Meta · R$ 8.745</div>
+          <div class="seg s-google" style="width:18.3%">Google · R$ 1.961</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="slab"><span>Divisão das vendas atribuídas</span><span>R$ 80.927 no total</span></div>
+        <div class="track">
+          <div class="seg s-meta" style="width:76.2%">Meta · R$ 61.659</div>
+          <div class="seg s-google" style="width:23.8%">Google · R$ 19.267</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIARIO -->
+<section id="diario">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Dia a dia</span>
+      <h2>ROAS do tráfego, dia por dia</h2>
+      <p>Cada barra é o retorno do anúncio naquele dia. A linha tracejada marca o ponto de equilíbrio (4,0×). O começo do mês foi o mais fraco — os primeiros cinco dias puxaram a média para baixo antes de o mês estabilizar.</p>
+    </div>
+    <div class="chartcard">
+      <div class="chart">
+        <div class="beline" style="bottom:calc(16px + 25%)"><span>Equilíbrio 4,0×</span></div>
+<div class="bar lo" style="height:18.9%" data-roas="3.0×" data-day="01"><span class="bt">3</span></div>
+<div class="bar mid" style="height:63.9%" data-roas="10.2×" data-day="02"><span class="bt">10</span></div>
+<div class="bar mid" style="height:53.6%" data-roas="8.6×" data-day="03"><span class="bt">9</span></div>
+<div class="bar lo" style="height:6.9%" data-roas="1.1×" data-day="04"><span class="bt">1</span></div>
+<div class="bar lo" style="height:5.0%" data-roas="0.8×" data-day="05"><span class="bt">1</span></div>
+<div class="bar mid" style="height:43.3%" data-roas="6.9×" data-day="06"><span class="bt">7</span></div>
+<div class="bar mid" style="height:34.2%" data-roas="5.5×" data-day="07"><span class="bt">5</span></div>
+<div class="bar mid" style="height:77.2%" data-roas="12.4×" data-day="08"><span class="bt">12</span></div>
+<div class="bar lo" style="height:22.6%" data-roas="3.6×" data-day="09"><span class="bt">4</span></div>
+<div class="bar mid" style="height:42.7%" data-roas="6.8×" data-day="10"><span class="bt">7</span></div>
+<div class="bar mid" style="height:54.1%" data-roas="8.7×" data-day="11"><span class="bt">9</span></div>
+<div class="bar mid" style="height:43.1%" data-roas="6.9×" data-day="12"><span class="bt">7</span></div>
+<div class="bar mid" style="height:43.8%" data-roas="7.0×" data-day="13"><span class="bt">7</span></div>
+<div class="bar mid" style="height:60.4%" data-roas="9.7×" data-day="14"><span class="bt">10</span></div>
+<div class="bar lo" style="height:20.6%" data-roas="3.3×" data-day="15"><span class="bt">3</span></div>
+<div class="bar mid" style="height:45.8%" data-roas="7.3×" data-day="16"><span class="bt">7</span></div>
+<div class="bar mid" style="height:66.3%" data-roas="10.6×" data-day="17"><span class="bt">11</span></div>
+<div class="bar mid" style="height:62.4%" data-roas="10.0×" data-day="18"><span class="bt">10</span></div>
+<div class="bar mid" style="height:60.2%" data-roas="9.6×" data-day="19"><span class="bt">10</span></div>
+<div class="bar mid" style="height:49.8%" data-roas="8.0×" data-day="20"><span class="bt">8</span></div>
+<div class="bar mid" style="height:73.4%" data-roas="11.8×" data-day="21"><span class="bt">12</span></div>
+<div class="bar mid" style="height:38.4%" data-roas="6.1×" data-day="22"><span class="bt">6</span></div>
+<div class="bar mid" style="height:41.7%" data-roas="6.7×" data-day="23"><span class="bt">7</span></div>
+<div class="bar hi" style="height:94.9%" data-roas="15.2×" data-day="24"><span class="bt">15</span></div>
+<div class="bar mid" style="height:42.6%" data-roas="6.8×" data-day="25"><span class="bt">7</span></div>
+<div class="bar lo" style="height:21.2%" data-roas="3.4×" data-day="26"><span class="bt">3</span></div>
+<div class="bar mid" style="height:33.6%" data-roas="5.4×" data-day="27"><span class="bt">5</span></div>
+<div class="bar mid" style="height:73.5%" data-roas="11.8×" data-day="28"><span class="bt">12</span></div>
+<div class="bar mid" style="height:46.8%" data-roas="7.5×" data-day="29"><span class="bt">7</span></div>
+<div class="bar mid" style="height:52.3%" data-roas="8.4×" data-day="30"><span class="bt">8</span></div>
+<div class="bar mid" style="height:43.2%" data-roas="6.9×" data-day="31"><span class="bt">7</span></div>
+      </div>
+      <div class="xaxis">
+        <span>1</span><span></span><span></span><span></span><span>5</span><span></span><span></span><span></span><span></span><span>10</span><span></span><span></span><span></span><span></span><span>15</span><span></span><span></span><span></span><span></span><span>20</span><span></span><span></span><span></span><span></span><span>25</span><span></span><span></span><span></span><span></span><span>30</span><span></span>
+      </div>
+      <div class="legend">
+        <i class="lg-hi">Alto retorno (15× ou mais)</i>
+        <i class="lg-mid">Retorno saudável (4× a 15×)</i>
+        <i class="lg-lo">Abaixo do equilíbrio (menos de 4×)</i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUES -->
+<section id="destaques">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Destaques</span>
+      <h2>Melhores dias e dias de atenção</h2>
+      <p>Foram 6 dias abaixo do ponto de equilíbrio, concentrados no início do mês. Os melhores dias vieram na segunda metade, quando o mês encontrou ritmo.</p>
+    </div>
+    <div class="twocol">
+      <div class="listcard good">
+        <h3>Melhores dias do mês</h3>
+        <p class="hint">Por retorno sobre o anúncio (ROAS do tráfego)</p>
+        <ul class="daylist">
+          <li><div class="dd">24/08 <small>segunda</small></div><div class="rr up">15,18×</div><div class="rc">R$ 6.540<br>com R$ 430</div></li>
+          <li><div class="dd">08/08 <small>sábado</small></div><div class="rr up">12,36×</div><div class="rc">R$ 3.041<br>com R$ 246</div></li>
+          <li><div class="dd">28/08 <small>sexta</small></div><div class="rr up">11,76×</div><div class="rc">R$ 4.311<br>com R$ 366</div></li>
+          <li><div class="dd">21/08 <small>sexta</small></div><div class="rr up">11,75×</div><div class="rc">R$ 4.435<br>com R$ 377</div></li>
+          <li><div class="dd">17/08 <small>segunda</small></div><div class="rr up">10,61×</div><div class="rc">R$ 3.805<br>com R$ 358</div></li>
+        </ul>
+      </div>
+      <div class="listcard warn">
+        <h3>Dias de atenção</h3>
+        <p class="hint">Ficaram abaixo do equilíbrio de 4,0×</p>
+        <ul class="daylist">
+          <li><div class="dd">05/08 <small>quarta</small></div><div class="rr down">0,80×</div><div class="rc">R$ 242<br>com R$ 303</div></li>
+          <li><div class="dd">04/08 <small>terça</small></div><div class="rr down">1,10×</div><div class="rc">R$ 319<br>com R$ 289</div></li>
+          <li><div class="dd">01/08 <small>sábado</small></div><div class="rr down">3,02×</div><div class="rc">R$ 814<br>com R$ 269</div></li>
+          <li><div class="dd">15/08 <small>sábado</small></div><div class="rr down">3,30×</div><div class="rc">R$ 936<br>com R$ 283</div></li>
+          <li><div class="dd">26/08 <small>quarta</small></div><div class="rr down">3,40×</div><div class="rc">R$ 1.238<br>com R$ 363</div></li>
+          <li><div class="dd">09/08 <small>domingo</small></div><div class="rr down">3,61×</div><div class="rc">R$ 1.288<br>com R$ 357</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEMANA -->
+<section id="semana">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Padrão semanal</span>
+      <h2>Sexta-feira é o melhor dia para vender</h2>
+      <p>A sexta (10,0×) e a segunda (9,8×) puxaram o mês, enquanto a quarta foi o dia mais fraco (5,3×). Vale observar se esse padrão se mantém em setembro antes de tirar conclusão.</p>
+    </div>
+    <div class="wkchart">
+      <div class="wkcol"><div class="wbar" style="height:98px"></div><div class="wd">Seg</div><div class="wv">9,8×</div></div>
+      <div class="wkcol"><div class="wbar" style="height:68px"></div><div class="wd">Ter</div><div class="wv">6,8×</div></div>
+      <div class="wkcol worst"><div class="wbar" style="height:53px"></div><div class="wd">Qua</div><div class="wv">5,3×</div></div>
+      <div class="wkcol"><div class="wbar" style="height:68px"></div><div class="wd">Qui</div><div class="wv">6,8×</div></div>
+      <div class="wkcol best"><div class="wbar" style="height:100px"></div><div class="wd">Sex</div><div class="wv">10,0×</div></div>
+      <div class="wkcol"><div class="wbar" style="height:64px"></div><div class="wd">Sáb</div><div class="wv">6,4×</div></div>
+      <div class="wkcol"><div class="wbar" style="height:73px"></div><div class="wd">Dom</div><div class="wv">7,3×</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CRIATIVOS -->
+<section id="criativos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Criativos</span>
+      <h2>Melhores criativos do mês</h2>
+      <p>Os cinco anúncios que mais performaram em agosto. Servem de referência de formato e linguagem para os próximos criativos de primavera/verão.</p>
+    </div>
+    <div class="crgrid">
+      <div class="crcard">
+        <div class="crthumb"><div class="crrank">1</div><img src="https://drive.google.com/thumbnail?id=1yMv9JE5KSlcbHbh0cv3xnbednFvodCnV&sz=w400" alt="07_SA_1202" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=&quot;ph&quot;>SA</div>')"></div>
+        <div class="crbody"><div class="crcode">07_SA_1202</div><a class="crlink" href="https://drive.google.com/file/d/1yMv9JE5KSlcbHbh0cv3xnbednFvodCnV/view?usp=drive_link" target="_blank" rel="noopener">Ver criativo</a></div>
+      </div>
+      <div class="crcard">
+        <div class="crthumb"><div class="crrank">2</div><img src="https://drive.google.com/thumbnail?id=1HO40jXVfuPxTecKULF3cNaaVk_4qDCmu&sz=w400" alt="02_SA_2811" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=&quot;ph&quot;>SA</div>')"></div>
+        <div class="crbody"><div class="crcode">02_SA_2811</div><a class="crlink" href="https://drive.google.com/file/d/1HO40jXVfuPxTecKULF3cNaaVk_4qDCmu/view?usp=drive_link" target="_blank" rel="noopener">Ver criativo</a></div>
+      </div>
+      <div class="crcard">
+        <div class="crthumb"><div class="crrank">3</div><img src="https://drive.google.com/thumbnail?id=1AQ6c7TgzZQY0N8BXR6hddqjSg9-ibJEt&sz=w400" alt="03_SA_1808" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=&quot;ph&quot;>SA</div>')"></div>
+        <div class="crbody"><div class="crcode">03_SA_1808</div><a class="crlink" href="https://drive.google.com/file/d/1AQ6c7TgzZQY0N8BXR6hddqjSg9-ibJEt/view?usp=drive_link" target="_blank" rel="noopener">Ver criativo</a></div>
+      </div>
+      <div class="crcard">
+        <div class="crthumb"><div class="crrank">4</div><img src="https://drive.google.com/thumbnail?id=1aGWzTQv5-b-rKu4TNZcJQnAKnt9BzM_u&sz=w400" alt="01_SA_0308" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=&quot;ph&quot;>SA</div>')"></div>
+        <div class="crbody"><div class="crcode">01_SA_0308</div><a class="crlink" href="https://drive.google.com/file/d/1aGWzTQv5-b-rKu4TNZcJQnAKnt9BzM_u/view?usp=drive_link" target="_blank" rel="noopener">Ver criativo</a></div>
+      </div>
+      <div class="crcard">
+        <div class="crthumb"><div class="crrank">5</div><img src="https://drive.google.com/thumbnail?id=1LKqfHDOD_BQTCiSbp3X5SXosuqS9YfrU&sz=w400" alt="02_SA_3006" onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div class=&quot;ph&quot;>SA</div>')"></div>
+        <div class="crbody"><div class="crcode">02_SA_3006</div><a class="crlink" href="https://drive.google.com/file/d/1LKqfHDOD_BQTCiSbp3X5SXosuqS9YfrU/view?usp=drive_link" target="_blank" rel="noopener">Ver criativo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROXIMOS PASSOS -->
+<section id="proximos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Próximos passos</span>
+      <h2>O plano para setembro</h2>
+      <p>Manter a base que funcionou, renovar os criativos com a nova coleção e alinhar com o time o começo do uso da API oficial.</p>
+    </div>
+    <div class="reads">
+      <div class="readcard r1">
+        <div class="rtag">Passo 1 · Investimento</div>
+        <h3>Escalar o tráfego</h3>
+        <p>Subir o investimento em campanhas de tráfego para R$ 12.000, priorizando os dias e criativos que mais renderam no mês.</p>
+      </div>
+      <div class="readcard r2">
+        <div class="rtag">Passo 2 · Criativos</div>
+        <h3>Novos criativos primavera/verão</h3>
+        <p>Publicar os anúncios dos lançamentos de primavera/verão, usando os 5 melhores criativos do mês como referência de formato e linguagem.</p>
+      </div>
+      <div class="readcard r3">
+        <div class="rtag">Passo 3 · Integração</div>
+        <h3>Reunião: começar a usar a API oficial</h3>
+        <p>Marcar a reunião com o time para dar início ao uso da API oficial, alinhando responsáveis e primeiros passos da implementação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fl">Simples Assim Atacado</div>
+    <p>Relatório de Mídia Paga · Fechamento de Agosto 2026 · Meta Ads + Google Ads</p>
+    <p style="margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.04em;color:#cfc7bd">Elaborado por Jéssica Kamilly Santos Borges</p>
+  </div>
+</footer>
+
+</body>
+</html>
